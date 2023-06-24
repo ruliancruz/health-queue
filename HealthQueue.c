@@ -1,13 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h> // "sleep"
 #include <stdbool.h> // "bool", "true" e "false"
 #define BUF_SIZE 101
 
 // ajustes de portabilidade
 #ifdef _WIN32
 	#include <locale.h>
+	#include <windows.h>
 
 	setlocale(LC_ALL, "Portuguese");
 
@@ -22,6 +22,7 @@
 	}
 #else
 	#include <stdio_ext.h>
+	#include <unistd.h>
 
 	void clearScreen()
 	{
@@ -373,8 +374,8 @@ void printList(List list)
 	while (Aux != NULL)
 	{
     	printf("Id %d\n", Aux->item.id);
-    	printf("Nome: %s", Aux->item.name);
-    	printf("Endereço: %s", Aux->item.address);
+    	printf("Nome: %s\n", Aux->item.name);
+    	printf("Endereço: %s\n", Aux->item.address);
     	printf("CNPJ: %s\n", Aux->item.cnpj);
     	Aux = Aux->next;
 	}
