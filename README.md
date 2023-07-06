@@ -1,7 +1,5 @@
 # Health Queue
 
-## About
-
 Project prepared as a partial requirement for completion of the Data Structures subject of the Degree in Computing at IFBA - Campus Jacobina.
 
 The program, developed in the C programming language, registers hospitals and patients from these hospitals in dynamic data structures.
