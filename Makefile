@@ -1,20 +1,27 @@
+####### MAKEFILE #######
+
+# directories
+BIN_PATH = ./bin
+OBJ_PATH = ./obj
+SRC_PATH = ./src
+
+# objects
+OBJECT1 = $(OBJ_PATH)/HealthQueue.o
+OBJECT2 = $(OBJ_PATH)/main.o
+
+# others
 CC            = gcc # compiler
-LIB_FILE_SRC  = ./src/libs/HealthQueue/HealthQueue.c
-MAIN_FILE_SRC = ./src/main.c
-EXEC          = ./bin/main
-OBJECTS       = ./obj/*
-BINARIES      = ./bin/*
-
-OBJECT1 = ./obj/HealthQueue.o
-
-# ./bin: executables
-# ./obj: .o files
-# ./src: .c files
+LIB_FILE_SRC  = $(SRC_PATH)/libs/HealthQueue/HealthQueue.c
+MAIN_FILE_SRC = $(SRC_PATH)/main.c
+EXEC          = $(BIN_PATH)/main
+OBJECTS       = $(OBJ_PATH)/*
+BINARIES      = $(BIN_PATH)/*
 
 # run: make or make all
 all: $(LIB_FILE_SRC) $(MAIN_FILE_SRC)
 	$(CC) -c $(LIB_FILE_SRC) -o $(OBJECT1)
-	$(CC) $(MAIN_FILE_SRC) $(OBJECTS) -o $(EXEC)
+	$(CC) -c $(MAIN_FILE_SRC) -o $(OBJECT2)
+	$(CC) $(OBJECTS) -o $(EXEC)
 
 # run: make run
 run: $(EXEC)
