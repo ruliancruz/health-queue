@@ -1,15 +1,26 @@
-# variáveis
-OUTPUT = main
-BIN    = ./bin
-OBJ    = ./obj
-SRC    = ./src
-LIBS   = $(SRC)/libs
+CC            = gcc # compiler
+LIB_FILE_SRC  = ./src/libs/HealthQueue/HealthQueue.c
+MAIN_FILE_SRC = ./src/main.c
+EXEC          = ./bin/main
+OBJECTS       = ./obj/*
+BINARIES      = ./bin/*
 
-all:
-	gcc -c $(LIBS)/HealthQueue/HealthQueue.c -o $(OBJ)/HealthQueue.o
-	gcc $(SRC)/main.c $(OBJ)/* -o $(BIN)/$(OUTPUT)
-run:
-	$(BIN)/$(OUTPUT)
-clean:
-	rm -f $(OBJ)/*
-	rm -f $(BIN)/*
+OBJECT1 = ./obj/HealthQueue.o
+
+# ./bin: executables
+# ./obj: .o files
+# ./src: .c files
+
+# run: make or make all
+all: $(LIB_FILE_SRC) $(MAIN_FILE_SRC)
+	$(CC) -c $(LIB_FILE_SRC) -o $(OBJECT1)
+	$(CC) $(MAIN_FILE_SRC) $(OBJECTS) -o $(EXEC)
+
+# run: make run
+run: $(EXEC)
+	$(EXEC)
+
+# run: make clean
+clean: $(OBJECTS) $(BINARIES)
+	rm -f $(OBJECTS)
+	rm -f $(BINARIES)
