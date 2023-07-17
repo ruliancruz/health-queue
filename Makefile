@@ -1,33 +1,49 @@
 ####### MAKEFILE #######
 
-# directories
+# Directories
 BIN_PATH := ./bin
 OBJ_PATH := ./obj
 SRC_PATH := ./src
 
-# objects
-OBJECT1 := $(OBJ_PATH)/HealthQueue.o
-OBJECT2 := $(OBJ_PATH)/main.o
+# Sources
+MAIN_SRC         := $(SRC_PATH)/main.c
+HEALTH_QUEUE_SRC := $(SRC_PATH)/libs/HealthQueue/HealthQueue.c
 
-# others
-CC            := gcc # compiler
-LIB_FILE_SRC  := $(SRC_PATH)/libs/HealthQueue/HealthQueue.c
-MAIN_FILE_SRC := $(SRC_PATH)/main.c
-EXEC          := $(BIN_PATH)/main
-OBJECTS       := $(OBJ_PATH)/*
-BINARIES      := $(BIN_PATH)/*
+# Objects
+MAIN_OBJ         := $(OBJ_PATH)/main.o
+HEALTH_QUEUE_OBJ := $(OBJ_PATH)/HealthQueue.o
 
-# run: make or make all
-all: $(LIB_FILE_SRC) $(MAIN_FILE_SRC)
-	$(CC) -c $(LIB_FILE_SRC) -o $(OBJECT1)
-	$(CC) -c $(MAIN_FILE_SRC) -o $(OBJECT2)
-	$(CC) $(OBJECTS) -o $(EXEC)
+# Others
+CC           := gcc
+EXEC         := $(BIN_PATH)/main
+OBJECTS      := $(OBJ_PATH)/*
+BINARIES     := $(BIN_PATH)/*
+PROJECT_NAME := HealthQueue
 
-# run: make run
-run: $(EXEC)
-	$(EXEC)
+# To run: make [target] (all, main.o, HealthQueue.o, etc.). Ex.: make all
 
-# run: make clean
-clean: $(OBJECTS) $(BINARIES)
-	rm -f $(OBJECTS)
-	rm -f $(BINARIES)
+# Generates the executable file
+all: main.o HealthQueue.o
+	@$(CC) $(OBJECTS) -o $(EXEC)
+	@echo "Done."
+	
+# Generates dependency (object file)
+main.o: $(MAIN_SRC)
+	@$(CC) -c $(MAIN_SRC) -o $(MAIN_OBJ)
+	
+HealthQueue.o: $(HEALTH_QUEUE_SRC)
+	@$(CC) -c $(HEALTH_QUEUE_SRC) -o $(HEALTH_QUEUE_OBJ)
+	
+run:
+	@$(EXEC)
+
+# Generates a compiled and compressed archive of all project files
+zip:
+	@zip -rq9 $(PROJECT_NAME) *
+	@echo "Done."
+
+# Removes all binary and object files
+clean:
+	@rm -f $(OBJECTS)
+	@rm -f $(BINARIES)
+	@echo "Done."
