@@ -39,7 +39,7 @@ run:
 
 # Generates a compiled and compressed archive of all project files
 zip:
-	@zip -rq9 $(PROJECT_NAME) *
+	@zip -rq9 ${PROJECT_NAME} bin src obj Makerfile README.md LICENSE
 	@echo "Done."
 
 # Removes all binary and object files
